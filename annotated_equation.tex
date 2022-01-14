@@ -1,0 +1,57 @@
+\documentclass[preview=true]{standalone}
+
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{positioning, tikzmark, fadings}
+
+\begin{document}
+
+\vspace*{1cm}
+
+\begin{figure}
+    \begin{equation*}
+        \tikzset{nodes={circle, minimum width=5mm, minimum height=5mm}}
+        Pr[
+            \tikzmarknode[fill=red!25]{a}{\mathcal{A}}
+        (
+            \tikzmarknode[fill=green!50]{d}{D_1}
+        ) \in S] \leq exp(
+            \tikzmarknode[fill=orange!50]{e}{\epsilon}
+        ) \cdot Pr[\mathcal{A}(D_2) \in
+            \tikzmarknode[fill=blue!25]{s}{S}
+        ]
+    \end{equation*}
+
+    \begin{tikzpicture}[overlay, remember picture, ->, >=stealth, nodes={font=\footnotesize, align=left}]
+        \node[above=3mm of a, color=red!75] (a_note) {A randomized\\algorithm};
+        \draw[color=red!75, path fading=north]
+            (a_note.north west) --
+            (a_note.south west) -|
+            (a.north);
+
+        \node[above=3mm of e, color=orange] (e_note) {Privacy budget};
+        \draw[color=orange, path fading=north]
+            (e_note.north west) --
+            (e_note.south west) -|
+            (e.north);
+
+        \node[below=3mm of s, color=blue!75] (s_note) {All subset of\\the algorithm};
+        \draw[color=blue!75, path fading=south]
+            (s_note.south west) --
+            (s_note.north west) -|
+            (s.south);
+
+        \node[below=3mm of d, color=green!75!black] (d_note) {A personal dataset};
+        \draw[color=green!75!black, path fading=south]
+            (d_note.south west) --
+            (d_note.north west) -|
+            (d.south);
+    \end{tikzpicture}
+    \bigskip
+    \caption{Annotated \enquote{definition} of $\epsilon$-differential privacy.}
+\end{figure}
+
+\vspace*{5mm}
+
+\end{document}
